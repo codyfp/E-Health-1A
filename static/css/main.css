@@ -4,6 +4,8 @@
     margin-left: 25%;
     margin-right: 25%;
     margin-top: 40px;
+
+    
 }
 p {
     font-size: 20px;
@@ -67,4 +69,17 @@ body{
  
  background: url("/static/images/background2.png") 50% 0 no-repeat fixed;
      background-repeat: repeat-y;
+}
+/*registration.html css*/
+.registration.container {
+    margin-top: 150px;
+        width: 520px;
+        background-color: #E2E2E2;
+        -webkit-border-radius: 10px;/*changes edges to curves*/
+    padding-bottom: 20px;
+    padding-top: 10px;
+}
+.registerForm {
+    
+    margin-top: 40px;
 }

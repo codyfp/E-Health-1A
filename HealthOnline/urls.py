@@ -20,6 +20,7 @@ from pages import views
 urlpatterns = [
         path('admin/', admin.site.urls),
         path('', include('OnlineConsultation.urls')),
-    path('home/', views.home_view, name='home'),
+        path('home/', views.home_view, name='home'),
+        path('register/', views.register_view, name='register'),
 
 ]
