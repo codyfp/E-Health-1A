@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+<!--This template does not have any function for out webapplication. 
+  It is the simplest registration template you can view. Yet it demonstrates template tags functionality 
+in an html file. Therefore I am leaving this here for now so for the ones who doesn't know how template tags work, especially 
+with respect to forms can get an idea. You can also view how it looks by browsing the link .../register/patient
+Try to lookup especially to those {% block content %} {% endblock %} ones. They are called template inheritance and they are a huge
+time saver when you master it.
+-->
+
+{% block content %}
+<h2>Sign up</h2>
+  <form method="post">
+    {% csrf_token %}
+    {% for field in form %}
+      <p>
+        {{ field.label_tag }}<br>
+        {{ field }}
+        {% if field.help_text %}
+          <small style="color: grey">{{ field.help_text }}</small>
+        {% endif %}
+        {% for error in field.errors %}
+          <p style="color: red">{{ error }}</p>
+        {% endfor %}
+      </p>
+    {% endfor %}
+    <button type="submit">Sign up</button>
+  </form>
+{% endblock %}
