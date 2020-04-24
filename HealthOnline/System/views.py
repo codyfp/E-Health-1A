@@ -39,10 +39,10 @@ def DoctorSignUpView(request):
     return render(request, 'doctor_register.html', context)
 
 def PatientSignUpView(request):
-    form = DoctorSignUpForm()
+    form = PatientSignUpForm()
 
     if request.method == 'POST':
-        form = DoctorSignUpForm(request.POST)
+        form = PatientSignUpForm(request.POST)
         if form.is_valid:
             user = form.save()
             patient = Patient.objects.create(user=user)
