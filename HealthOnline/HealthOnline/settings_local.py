@@ -1,3 +1,8 @@
+import os
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+LOG_PATH = os.path.join(BASE_DIR, "log/debug.log")
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -34,7 +39,7 @@ LOGGING = {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
             'filters': ['require_debug_true'],
-            'filename': '/home/ata/SES-1A-4PM---Group-4/HealthOnline/log/debug.log',
+            'filename': LOG_PATH,
             'formatter': 'verbose'
         },
         'null': {
