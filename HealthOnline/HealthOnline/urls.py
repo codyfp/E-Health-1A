@@ -21,6 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home_view, name='home'),
     path('register/', views.register_view, name='register'),
-    path('register/patient/', views.PatientSignUpView, name='patient_register'),
-    path('register/doctor/', views.DoctorSignUpView, name='doctor_register'),
+    path('register/patient/', views.patient_register_view, name='patient_register'),
+    path('register/doctor/', views.doctor_register_view, name='doctor_register'),
 ]

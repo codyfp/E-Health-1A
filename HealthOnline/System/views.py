@@ -4,7 +4,7 @@ from django.contrib.auth import login
 from django.contrib.auth.models import User
 
 from System.forms import DoctorSignUpForm, PatientSignUpForm 
-from System.models import Doctor, Patient
+from System.models import UserProfile
 
 
 import logging
@@ -20,7 +20,7 @@ def home_view(request, *args, **kwargs):
 def register_view(request, *args, **kwargs):
     return render(request, "register.html", {})
 
-def DoctorSignUpView(request):
+def doctor_register_view(request):
     form = DoctorSignUpForm()
     
     if request.method == 'POST':
@@ -28,8 +28,9 @@ def DoctorSignUpView(request):
         logger.debug(form)
         if form.is_valid():
             user = form.save()
-            doctor = Doctor.objects.create(user=user)
-            doctor.organization.add(form.cleaned_data.get('organization'))
+            doctor = UserProfile.objects.create(user=user)
+            doctor.is_doctor = True
+            doctor.organization = form.cleaned_data.get('organization')
         else:
             logger.debug('Form is invalid')
             logger.debug(form.errors.as_data())
@@ -38,14 +39,15 @@ def DoctorSignUpView(request):
     context = {'form':form}
     return render(request, 'doctor_register.html', context)
 
-def PatientSignUpView(request):
+def patient_register_view(request):
     form = PatientSignUpForm()
 
     if request.method == 'POST':
         form = PatientSignUpForm(request.POST)
         if form.is_valid:
             user = form.save()
-            patient = Patient.objects.create(user=user)
-    
+            patient = UserProfile.objects.create(user=user)
+            patient.is_patient = True
+
     context = {'form':form}
     return render(request, 'signup.html', context) #patient_register.html needs to be created and changed with this 
