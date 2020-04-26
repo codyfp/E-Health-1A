@@ -50,4 +50,4 @@ def patient_register_view(request):
             patient.is_patient = True
 
     context = {'form':form}
-    return render(request, 'signup.html', context) #patient_register.html needs to be created and changed with this 
+    return render(request, 'patient_register.html', context) #patient_register.html needs to be created and changed with this 

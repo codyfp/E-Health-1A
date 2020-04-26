@@ -140,6 +140,7 @@
             </h1>
         </div>
         <form class="registerForm">
+            {% csrf_token %}
             <div class="form-row">
                 <div class="form group col-6">
 
@@ -161,8 +162,12 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="exampleUser">User Login</label>
+                <label for="exampleUser">E-mail/label>
                 <input type="email" class="form-control" id="exampleUser" aria-describedby="emailHelp" placeholder="Enter user login">
+            </div>
+            <div class="form-group">
+                <label for="exampleUser">User Login</label>
+                <input type="text" class="form-control" id="exampleUser" aria-describedby="emailHelp" placeholder="Enter user login">
             </div>
             <div class="form-group">
                 <label for="exampleInputPassword1">Password</label>
