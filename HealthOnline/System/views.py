@@ -17,6 +17,9 @@ logger = logging.getLogger('__name__')
 def home_view(request, *args, **kwargs):
     return render(request, "home.html", {})
 
+def login_view(request, *args, **kwargs):
+    return render(request, "login.html", {})
+
 def register_view(request, *args, **kwargs):
     return render(request, "register.html", {})
 
@@ -50,4 +53,12 @@ def patient_register_view(request):
             patient.is_patient = True
 
     context = {'form':form}
+
     return render(request, 'patient_register.html', context) #patient_register.html needs to be created and changed with this 
+
+    return render(request, 'signup.html', context) #patient_register.html needs to be created and changed with this 
+
+# test frontend page
+def test_view(request):
+    return render(request, "test.html", {})
+

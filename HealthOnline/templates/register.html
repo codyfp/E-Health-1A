@@ -1,144 +1,48 @@
+{% extends 'base.html' %}
+
 {% load static %}
-<!DOCTYPE html>
-
-<html lang="en-US">
-
-<head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css'%}">
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrlap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-</head>
-
-<body style="background-image: url({% static 'images/reg-background4.jpg'%});">
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Health Online</a>
-        <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-            <ul class="navbar-nav nav-fill ">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Features</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Pricing</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Disabled</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-    <div class="registration container">
-        <div class="headerunderline">
-            <h1>
-                <center>
-                    Create an account</center>
-            </h1>
-        </div>
-        <form class="registerForm">
-            <div class="form-row">
-                <div class="form group col-6">
-
-                    <label for="form-group">First Name</label>
-                    <div class="input-group-prepend">
-                        <div class="input-group-text">&#9999;</div>
-                        <input type="text" id="exmapleFirst" class="form-control" placeholder="First name">
-
-                    </div>
-                </div>
-
-                <div class="form-group col-6">
-                    <label for="exampleLast">Last Name</label>
-                    <div class="input-group-prepend">
-                        <div class="input-group-text">&#9999;</div>
-                        <input type="text" id="exmapleLast" class="form-control" placeholder="Last name">
-
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="exampleUser">User Login</label>
-                <input type="email" class="form-control" id="exampleUser" aria-describedby="emailHelp" placeholder="Enter user login">
-            </div>
-            <div class="form-group">
-                <label for="exampleInputPassword1">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" aria-describedby="passwordTip">
-                <small id="passwordTip" class="form-text text-muted">
-                    Password must include the following:
-                    <ul>
-                        <li>
-                            One Lower-case letter</li>
-                        <li>One Captial letter</li>
-                        <li>One Number</li>
-                    </ul>
-
-                    Never share your account details with anyone.
-                </small>
-            </div>
-
-            <div class="form-group">
-                <select class="custom-select" required>
-                    <option value="">Select user role</option>
-                    <option value="1">Patient</option>
-                    <option value="2">Doctor</option>
-                </select>
-                <div class="invalid-feedback">Example invalid custom select feedback</div>
-            </div>
-
-            <button type="submit" class="btn btn-secondary">Sign up</button>
-        </form>
+{% block content %}
+<body style="background-image: url({% static 'images/reg-background4.jpg'%});"></body>
+<div class="registration container">
+    <div class="headerunderline">
+        <h1><center>Create an account</center></h1>
     </div>
-</body>
+    <form class="registerForm">
+        <div class="form-row">
+            <div class="form group col-6">
+                <label for="form-group">First Name</label>
+                <div class="input-group-prepend">
+                    <div class="input-group-text">&#9999;</div>
+                    <input type="text" id="exmapleFirst" class="form-control" placeholder="First name">
+                </div>
+            </div>
+            <div class="form-group col-6">
+            <label for="exampleLast">Last Name</label>
+                <div class="input-group-prepend">
+                    <div class="input-group-text">&#9999;</div>
+                    <input type="text" id="exmapleLast" class="form-control" placeholder="Last name">
 
-</html>{% load static %}
-<!DOCTYPE html>
-
-<html lang="en-US">
-
-<head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css'%}">
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrlap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-</head>
-
-<body style="background-image: url({% static 'images/reg-background4.jpg'%});">
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Health Online</a>
-        <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-            <ul class="navbar-nav nav-fill ">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Features</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Pricing</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Disabled</a>
-                </li>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="exampleUser">User Login</label>
+            <input type="email" class="form-control" id="exampleUser" aria-describedby="emailHelp" placeholder="Enter user login">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" aria-describedby="passwordTip">
+            <small id="passwordTip" class="form-text text-muted">
+                Password must include the following:
+            <ul>
+                <li>One Lower-case letter</li>
+                <li>One Capital letter</li>
+                <li>One Number</li>
             </ul>
+                Never share your account details with anyone.
+            </small>
         </div>
-    </nav>
-    <div class="registration container">
-        <div class="headerunderline">
-            <h1>
-                <center>
-                    Create an account</center>
-            </h1>
-        </div>
+<<<<<<< HEAD
         <form class="registerForm">
             {% csrf_token %}
             <div class="form-row">
@@ -198,5 +102,24 @@
         </form>
     </div>
 </body>
+=======
+>>>>>>> 206378737ac377a1ddadb3e2a7a25644861c5efd
 
-</html>
+        <div class="form-group">
+            <select class="custom-select" required>
+                <option value="">Select user role</option>
+                <option value="1">Patient</option>
+                <option value="2">Doctor</option>
+            </select>
+            <div class="invalid-feedback">Example invalid custom select feedback</div>
+        </div>
+        <button type="submit" class="btn btn-secondary">Sign up</button>
+    </form>
+</div>
+<div class="altSignupLogin">
+    <small id="altform">
+        Already have an account? 
+        <a class="altform" href="{% url 'login'%}">Login</a>
+    </small>   
+</div>
+{% endblock %}
