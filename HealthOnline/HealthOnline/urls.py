@@ -20,7 +20,11 @@ from System import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home_view, name='home'),
+    path('login/', views.login_view, name='login'),
     path('register/', views.register_view, name='register'),
     path('register/patient/', views.patient_register_view, name='patient_register'),
     path('register/doctor/', views.doctor_register_view, name='doctor_register'),
+    
+    #test page for frontend
+    path('test/', views.test_view, name='test'),
 ]
