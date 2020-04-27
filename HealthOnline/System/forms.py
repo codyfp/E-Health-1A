@@ -58,3 +58,8 @@ class PatientSignUpForm(UserCreationForm):
         
         model   = User
         fields  = ('username', 'first_name', 'last_name', 'email' ,'password1', 'password2', )
+
+
+class LoginForm(forms.Form):
+    user_name = forms.EmailField(widget=forms.EmailInput(attrs={'class':'form-control', 'placeholder':'Email'}),label='User Login', max_length=100, label_suffix='')
+    user_password = forms.CharField(widget=forms.PasswordInput(attrs={'class':'form-control', 'placeholder':'Password'}), label="Password", label_suffix='')

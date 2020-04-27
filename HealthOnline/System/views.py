@@ -2,8 +2,9 @@ from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.contrib.auth.models import User
+from django.http import HttpResponseRedirect
 
-from System.forms import DoctorSignUpForm, PatientSignUpForm 
+from System.forms import *
 from System.models import UserProfile
 
 
@@ -18,7 +19,14 @@ def home_view(request, *args, **kwargs):
     return render(request, "home.html", {})
 
 def login_view(request, *args, **kwargs):
-    return render(request, "login.html", {})
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            return HttpResponseRedirect('/thanks/')#change this line to handle checking with database and redirecting to correct url
+    else:
+        form = LoginForm()
+
+    return render(request, 'login.html', {'form': form})
 
 def register_view(request, *args, **kwargs):
     return render(request, "register.html", {})
@@ -60,5 +68,6 @@ def patient_register_view(request):
 
 # test frontend page
 def test_view(request):
-    return render(request, "test.html", {})
+
+    return render(request, 'test.html', {})
 

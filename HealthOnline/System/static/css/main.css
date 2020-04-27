@@ -80,7 +80,10 @@ body{
     padding-top: 10px;
 }
 .registerForm {
-    
+    margin-top: 40px;
+}
+
+.loginForm{
     margin-top: 40px;
 }
 
