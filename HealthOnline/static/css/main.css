@@ -73,7 +73,7 @@ body{
 /*registration.html css*/
 .registration.container {
     margin-top: 150px;
-        width: 520px;
+        width: 600px;
         background-color: #E2E2E2;
         -webkit-border-radius: 10px;/*changes edges to curves*/
     padding-bottom: 20px;
