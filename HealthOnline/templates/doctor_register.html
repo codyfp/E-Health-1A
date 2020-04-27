@@ -2,19 +2,9 @@
 <!DOCTYPE html>
 
 <html lang="en-US">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
 <head>
-<!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> -->
     <link rel="stylesheet" type="text/css" href="{% static 'css/main.css'%}">
-    <!--
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrlap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    -->
 </head>
 
 <body style="background-image: url({% static 'images/reg-background4.jpg'%});">
@@ -54,8 +44,10 @@
                     <label for="first_name">First Name</label>
                     <div class="input-group-prepend">
                         <div class="input-group-text">&#9999;</div>
-                        <!--<input type="text" id="exmapleFirst" class="form-control" placeholder="First name">-->
                         {{form.first_name}}
+                        {% for error in form.first_name.errors %}
+                            <p style="color: red">{{ error }}</p>
+                        {% endfor %}
                         
                     </div>
                 </div>
@@ -64,30 +56,37 @@
                     <label for="last_name">Last Name</label>
                     <div class="input-group-prepend">
                         <div class="input-group-text">&#9999;</div>
-                        <!--<input type="text" id="exmapleLast" class="form-control" placeholder="Last name">-->
                         {{form.last_name}}
+                        {% for error in form.last_name.errors %}
+                            <p style="color: red">{{ error }}</p>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
             <div class="form-group">
                 <label for="email">E-mail</label>
-                <!--<input type="email" class="form-control" id="exampleUser" aria-describedby="emailHelp" placeholder="Enter user login">-->
                 {{form.email}}
+                {% for error in form.email.errors %}
+                            <p style="color: red">{{ error }}</p>
+                        {% endfor %}
             </div>
             <div class="form-group">
                 <label for="username">Username</label>
-                <!--<input type="email" class="form-control" id="exampleUser" aria-describedby="emailHelp" placeholder="Enter user login">-->
                 {{form.username}}
+                {% for error in form.username.errors %}
+                            <p style="color: red">{{ error }}</p>
+                {% endfor %}
             </div>
             <div class="form-group">
                 <label for="Current Health Organization">Current Health Organization</label>
-                <!--<input type="email" class="form-control" id="exampleUser" aria-describedby="emailHelp" placeholder="Enter user login">-->
                 {{form.organization}}
             </div>
             <div class="form-group">
                 <label for="password1">Password</label>
-                <!--<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" aria-describedby="passwordTip">-->
                 {{form.password1}}
+                {% for error in form.password1.errors %}
+                            <p style="color: red">{{ error }}</p>
+                {% endfor %}
                 <small id="passwordTip" class="form-text text-muted">
                     Password must include the following:
                     <ul>
@@ -103,25 +102,20 @@
 
             <div class="form-group">
                 <label for="password2">Repeat Password</label>
-                <!--<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" aria-describedby="passwordTip">-->
                 {{form.password2}}
+                {% for error in form.password2.errors %}
+                            <p style="color: red">{{ error }}</p>
+                {% endfor %}
             </div>
-            <!--
-            <div class="form-group">
-                <select class="custom-select" required>
-                    <option value="">Select user role</option>
-                    <option value="1">Patient</option>
-                    <option value="2">Doctor</option>
-                </select>
-                <div class="invalid-feedback">Example invalid custom select feedback</div>
-            </div>
-            -->
-            <!--<button type="submit" class="btn btn-secondary">Sign up</button>-->
-            <button type="submit">Sign up</button>
+            <button type="submit" class="btn btn-secondary">Sign up</button>
         </form>
     </div>
 </body>
 
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
 
 </html>

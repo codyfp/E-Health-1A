@@ -1,7 +1,7 @@
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
-from django.contrib.auth import login
 from django.contrib.auth.models import User
+from django.contrib import messages
 
 from System.forms import DoctorSignUpForm, PatientSignUpForm 
 from System.models import UserProfile
@@ -34,6 +34,8 @@ def doctor_register_view(request):
             doctor = UserProfile.objects.create(user=user)
             doctor.is_doctor = True
             doctor.organization = form.cleaned_data.get('organization')
+            username = form.cleaned_data.get('username')
+            return redirect('home')
         else:
             logger.debug('Form is invalid')
             logger.debug(form.errors.as_data())
