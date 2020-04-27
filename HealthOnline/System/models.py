@@ -3,6 +3,10 @@ from django.db import models
 
 # Create your models here.
 
+import logging
+# Log file configuration
+logger = logging.getLogger('__name__')
+
 class Gender(models.Model):
     name = models.CharField(max_length=12, null=True, blank=True)
 
@@ -46,24 +50,42 @@ class UserProfile(models.Model):
         return self.first_name + " " + self.last_name
 
 class Certificate(models.Model):
-    certificate = models.FileField(upload_to=('user_'+str(id)+'/Certificate/'))
-    doctor      = models.ForeignKey(UserProfile, blank=False, null=False, on_delete=models.PROTECT)    
+    doctor          = models.ForeignKey(User, blank=False, null=False, on_delete=models.PROTECT)
+    certificate     = models.FileField(upload_to=('user_'+str(id)+'/Certificate/'))
+    
+    def get_doctor(self):
+        return self.doctor.username
+    
+    def __str__(self):
+        return self.get_doctor() + "_medical_certificate"
 
 class Prescription(models.Model):
-    doctor  = models.ForeignKey(User, related_name='doctor', blank=False, null=False, on_delete=models.PROTECT)
-    patient = models.ForeignKey(User, related_name='patient', blank=False, null=False, on_delete=models.PROTECT)
-    dateTime= models.DateTimeField(null=False, blank=False)
-    drugs   = models.CharField(max_length=400, null=True, blank=True)
-    notes   = models.CharField(max_length=500, null=True, blank=True)
+    doctor          = models.ForeignKey(User, related_name='doctor_prescription', blank=False, null=False, on_delete=models.PROTECT)
+    patient         = models.ForeignKey(User, related_name='patient_prescription', blank=False, null=False, on_delete=models.PROTECT)
+    dateTime        = models.DateTimeField(null=False, blank=False)
+    drugs           = models.CharField(max_length=400, null=True, blank=True)
+    notes           = models.CharField(max_length=500, null=True, blank=True)
+    
+    def get_doctor(self):
+        return self.doctor.username
+    
+    def get_patient(self):
+        return self.patient.username
 
     def __str__(self):
-        return self.id
+        return str(self.get_doctor()) + "_" + str(self.get_patient()) + "_" + str(self.dateTime) + "_prescription"
 
 class Consultation(models.Model):
-    doctor      = models.ForeignKey(UserProfile, related_name='doctor', blank=False, null=False, on_delete=models.PROTECT)
-    patient     = models.ForeignKey(UserProfile, related_name='patient', blank=False, null=False, on_delete=models.PROTECT)
+    doctor      = models.ForeignKey(User, related_name='doctor_consultation', blank=False, null=False, on_delete=models.PROTECT)
+    patient     = models.ForeignKey(User, related_name='patient_consultation', blank=False, null=False, on_delete=models.PROTECT)
     description = models.CharField(max_length=1000, null=True, blank=True)
     dateTime    = models.DateTimeField(null=False, blank=False)
+    
+    def get_doctor(self):
+        return self.doctor.username
+    
+    def get_patient(self):
+        return self.patient.username
 
     def __str__(self):
-        return self.id
+        return str(self.get_doctor()) + "_" + str(self.get_patient()) + "_" + str(self.dateTime)
