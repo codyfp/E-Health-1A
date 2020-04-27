@@ -45,11 +45,11 @@ class UserProfile(models.Model):
     def __str__(self):
         return self.first_name + " " + self.last_name
 
-class Certificates(models.Model):
+class Certificate(models.Model):
     certificate = models.FileField(upload_to=('user_'+str(id)+'/Certificate/'))
     doctor      = models.ForeignKey(UserProfile, blank=False, null=False, on_delete=models.PROTECT)    
 
-class Prescriptions(models.Model):
+class Prescription(models.Model):
     doctor  = models.ForeignKey(User, related_name='doctor', blank=False, null=False, on_delete=models.PROTECT)
     patient = models.ForeignKey(User, related_name='patient', blank=False, null=False, on_delete=models.PROTECT)
     dateTime= models.DateTimeField(null=False, blank=False)
@@ -59,7 +59,7 @@ class Prescriptions(models.Model):
     def __str__(self):
         return self.id
 
-class Consultations(models.Model):
+class Consultation(models.Model):
     doctor      = models.ForeignKey(UserProfile, related_name='doctor', blank=False, null=False, on_delete=models.PROTECT)
     patient     = models.ForeignKey(UserProfile, related_name='patient', blank=False, null=False, on_delete=models.PROTECT)
     description = models.CharField(max_length=1000, null=True, blank=True)

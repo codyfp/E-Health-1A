@@ -79,11 +79,11 @@
 
             <div class="form-group">
                 <label for="password1">Password</label>
-                {{form.password1}}
-                {% for error in form.password1.errors %}
-                     <p style="color: red">{{ error }}</p>
-                {% endfor %}
-                <small id="passwordTip" class="form-text text-muted">
+                    {{form.password1}}
+                    {% for error in form.password1.errors %}
+                        <p style="color: red">{{ error }}</p>
+                    {% endfor %}
+                <small id="passwordTip" class="form-text text-muted"></small>
                     Password must include the following:
                     <ul>
                         <li>
