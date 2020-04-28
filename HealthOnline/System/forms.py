@@ -4,51 +4,51 @@ from django import forms
 from django.db import transaction
 
 class DoctorSignUpForm(UserCreationForm):
-    organisation = forms.CharField(label='Current Health Organisation', max_length=100, widget=forms.TextInput(attrs={
+    organization = forms.CharField(label='Current Health Organization', max_length=100, widget=forms.TextInput(attrs={
         'class': 'form-control', 'placeholder':'Health Organisation'
     }) )
-    username = forms.CharField(label='Current Health Organisation', max_length=100, widget=forms.TextInput(attrs={
+    username = forms.CharField(label='Current Health Organization', max_length=100, widget=forms.TextInput(attrs={
         'class': 'form-control', 'placeholder':'Username'
     }) )
-    first_name = forms.CharField(label='Current Health Organisation', max_length=100, widget=forms.TextInput(attrs={
+    first_name = forms.CharField(label='Current Health Organization', max_length=100, widget=forms.TextInput(attrs={
         'class': 'form-control', 'placeholder':'Given Name'
     }) )
-    last_name= forms.CharField(label='Current Health Organisation', max_length=100, widget=forms.TextInput(attrs={
+    last_name= forms.CharField(label='Current Health Organization', max_length=100, widget=forms.TextInput(attrs={
         'class': 'form-control', 'placeholder':'Family Name'
     }) )
-    email = forms.CharField(label='Current Health Organisation', max_length=100, widget=forms.EmailInput(attrs={
+    email = forms.CharField(label='Current Health Organization', max_length=100, widget=forms.EmailInput(attrs={
         'class': 'form-control', 'placeholder':'Email Adress'
     }) )
-    password1 = forms.CharField(label='Current Health Organisation', max_length=100, widget=forms.PasswordInput(attrs={
+    password1 = forms.CharField(label='Current Health Organization', max_length=100, widget=forms.PasswordInput(attrs={
         'class': 'form-control', 'placeholder':'Password'
     }) )
-    password2 = forms.CharField(label='Current Health Organisation', max_length=100, widget=forms.PasswordInput(attrs={
+    password2 = forms.CharField(label='Current Health Organization', max_length=100, widget=forms.PasswordInput(attrs={
         'class': 'form-control', 'placeholder':'Password'
     }) )
   
     class Meta:
         model   = User
-        fields  = ['username', 'first_name', 'last_name', 'email', 'organisation' ,'password1', 'password2']
+        fields  = ['username', 'first_name', 'last_name', 'email', 'organization' ,'password1', 'password2']
 
 
 class PatientSignUpForm(UserCreationForm):
     
-    username = forms.CharField(label='Current Health Organisation', max_length=100, widget=forms.TextInput(attrs={
+    username = forms.CharField(label='Current Health Organization', max_length=100, widget=forms.TextInput(attrs={
         'class': 'form-control', 'placeholder':'Username'
     }) )
-    first_name = forms.CharField(label='Current Health Organisation', max_length=100, widget=forms.TextInput(attrs={
+    first_name = forms.CharField(label='Current Health Organization', max_length=100, widget=forms.TextInput(attrs={
         'class': 'form-control', 'placeholder':'Given Name'
     }) )
-    last_name= forms.CharField(label='Current Health Organisation', max_length=100, widget=forms.TextInput(attrs={
+    last_name= forms.CharField(label='Current Health Organization', max_length=100, widget=forms.TextInput(attrs={
         'class': 'form-control', 'placeholder':'Family Name'
     }) )
-    email = forms.CharField(label='Current Health Organisation', max_length=100, widget=forms.EmailInput(attrs={
+    email = forms.CharField(label='Current Health Organization', max_length=100, widget=forms.EmailInput(attrs={
         'class': 'form-control', 'placeholder':'Email address'
     }) )
-    password1 = forms.CharField(label='Current Health Organisation', max_length=100, widget=forms.PasswordInput(attrs={
+    password1 = forms.CharField(label='Current Health Organization', max_length=100, widget=forms.PasswordInput(attrs={
         'class': 'form-control', 'placeholder':'Password'
     }) )
-    password2 = forms.CharField(label='Current Health Organisation', max_length=100, widget=forms.PasswordInput(attrs={
+    password2 = forms.CharField(label='Current Health Organization', max_length=100, widget=forms.PasswordInput(attrs={
         'class': 'form-control', 'placeholder':'Repeat password'
     }) )
     
