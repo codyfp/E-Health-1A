@@ -25,7 +25,9 @@ def login_view(request, *args, **kwargs):
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
-            return HttpResponseRedirect('/thanks/')#change this line to handle checking with database and redirecting to correct url
+            user = form.get_user()
+            login(request, user)
+            return HttpResponseRedirect('home')#change this line to handle checking with database and redirecting to correct url
     else:
         form = LoginForm()
 
