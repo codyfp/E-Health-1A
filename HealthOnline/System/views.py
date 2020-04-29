@@ -22,19 +22,25 @@ def home_view(request, *args, **kwargs):
     return render(request, "home.html", {})
 
 def login_view(request, *args, **kwargs):
+    form = LoginForm()
+
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
-            user = form.get_user()
+            username = form.cleaned_data.get('user_name')
+            password = form.cleaned_data.get('user_password')
+            user = authenticate(request, username=username, password=password)
+        
+        if user is not None:
             login(request, user)
-            return HttpResponseRedirect('home')#change this line to handle checking with database and redirecting to correct url
-    else:
-        form = LoginForm()
+            return redirect('home')
+        else:
+            messages.info(request, 'Username OR password is incorrect')
+            logger.debug('User is not created')
 
-    return render(request, 'login.html', {'form': form})
+    context = {'form':form}
+    return render(request, 'login.html', context)
 
-def register_view(request, *args, **kwargs):
-    return render(request, "register.html", {})
 
 def doctor_register_view(request):
     form = DoctorSignUpForm()
@@ -82,3 +88,6 @@ def test_view(request):
 
     return render(request, 'test.html', {})
 
+
+def register_view(request, *args, **kwargs):
+    return render(request, "register.html", {})

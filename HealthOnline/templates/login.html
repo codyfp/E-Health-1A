@@ -10,6 +10,11 @@
 
 
     <div>
+        
+        {% for message in messages %}
+            <p id="messages">{{message}}</p>
+        {% endfor %}
+
         <form class="loginForm" method="post">
             {% csrf_token %}
             {{ form.user_name.label_tag }}
@@ -19,8 +24,8 @@
             {{ form.user_password.label_tag }}
             <div class="form-group">
                 {{ form.user_password }}
-            </div>
-                
+            </div> 
+
             <div style="text-align:center">  
                 <input type="submit" value="Login" class="btn btn-secondary">
             </div>
@@ -28,11 +33,14 @@
     </div>
 </div>
 
+
+
 <div class="altSignupLogin">
     <small id="altform">
         Don't have an account? 
         <a class="altform" href="{% url 'patient_register'%}">Sign up</a>
     </small>   
 </div>
+	
 
 {% endblock %}
