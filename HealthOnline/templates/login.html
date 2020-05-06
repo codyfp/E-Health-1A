@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<body style="background-image: url({% static 'images/reg-background4.jpg'%});"></body>
+
+<div class="registration container">
+    <div class="headerunderline">
+        <h1 style="text-align: center">Login to your account</h1>
+    </div>
+
+
+    <div>
+        
+        {% for message in messages %}
+            <p id="messages">{{message}}</p>
+        {% endfor %}
+
+        <form class="loginForm" method="post">
+            {% csrf_token %}
+            {{ form.user_name.label_tag }}
+            <div class="form-group">
+                {{ form.user_name }}
+            </div>
+            {{ form.user_password.label_tag }}
+            <div class="form-group">
+                {{ form.user_password }}
+            </div> 
+
+            <div style="text-align:center">  
+                <input type="submit" value="Login" class="btn btn-secondary">
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+<div class="altSignupLogin">
+    <small id="altform">
+        Don't have an account? 
+        <a class="altform" href="{% url 'patient_register'%}">Sign up</a>
+    </small>   
+</div>
+	
+
+{% endblock %}
