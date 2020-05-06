@@ -1,7 +1,6 @@
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
-
 from django.contrib import messages
 
 from django.http import HttpResponseRedirect
@@ -16,11 +15,10 @@ import logging
 logger = logging.getLogger('__name__')
 
 
-# Create your views here.
-
 def home_view(request, *args, **kwargs):
     return render(request, "home.html", {})
 
+# Registration Views
 def doctor_register_view(request):
     form = DoctorSignUpForm()
     
@@ -48,7 +46,7 @@ def patient_register_view(request):
     
     if request.method == 'POST':
         form = PatientSignUpForm(request.POST)
-        if form.is_valid:
+        if form.is_valid():
             user = form.save()
             patient = UserProfile.objects.create(user=user)
             patient.is_patient = True
@@ -75,8 +73,9 @@ def patient_panel_view(request, user_name):
     patient = request.user
 
     context = {'user': patient}
-    return render(request, 'doctor_panel.html', context)
+    return render(request, 'patient_panel.html', context)
 
+# Login view
 def login_view(request, *args, **kwargs):
     form = LoginForm()
 

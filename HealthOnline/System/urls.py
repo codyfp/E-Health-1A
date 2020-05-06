@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path
-from . import views
+from . import views, forms
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
@@ -16,17 +16,14 @@ urlpatterns = [
                                                                                   # The place I actually do the parameter passing tho is login function in redirect() function.
                                                                                   # I.e. check for user_name variable in the places I mentioned. 
                                                                                   
-    path('<str:user_name>', views.doctor_panel_view, name='patient_panel'),
+    path('<str:user_name>', views.patient_panel_view, name='patient_panel'),
     
-    path('reset_password/', auth_views.PasswordResetView.as_view(template_name="sample_password_reset.html"), 
-    name='reset_password'), # For frontend team: I am currently using default django password reset templates (html files) for 
-                            # all the rest of the password reset views below. But I changed this one to a sample template 
-                            # I found online so you could see how to change the templates you will create with the default ones. 
-                            # Basically you just pass it as an argument to template_name= parameter here as you can see here.
+    path('reset_password/', auth_views.PasswordResetView.as_view(template_name="password_reset.html", form_class=forms.PasswordResetForm), name='reset_password'), 
 
     path('reset_password_sent/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
     path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
     path('reset_password_complete/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
+   
     #test page for frontend
     path('test/', views.test_view, name='test'),
 ]

@@ -1,4 +1,4 @@
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordResetForm
 from django.contrib.auth.models import User
 from django import forms
 from django.db import transaction
@@ -64,3 +64,8 @@ class LoginForm(forms.Form):
     user_password = forms.CharField(widget=forms.PasswordInput(attrs={'class':'form-control', 'placeholder':'Password', 'name':'user_password'}), label="Password", label_suffix='')
     class Meta:
         fields = ['user_name', 'user_password']
+
+
+class PasswordResetForm(PasswordResetForm):
+    email = forms.EmailField(max_length=254,widget=forms.EmailInput(attrs={'class':'form-control', 'autocomplete': 'email', 'placeholder':'Email address'}), label_suffix='')
+
