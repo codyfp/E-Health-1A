@@ -1,0 +1,16 @@
+
+{% load static %}
+{% block content %}
+
+{% csrf_token %}
+{% if user.is_authenticated %}
+<p>
+<h1>Welcome Doctor </h1> <h2>{{ user.username }}</h2>
+{{% else %}
+<h1>User not logged in!</h1>
+{% endif %}
+</p>>
+<p>
+<button type="submit">Log Out</button>
+</p>
+{% endblock %}

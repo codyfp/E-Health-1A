@@ -1,11 +1,9 @@
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-<<<<<<< HEAD
-LOG_PATH = os.path.join(BASE_DIR, "/log/debug.log")
-=======
+
 LOG_PATH = os.path.join(BASE_DIR, "log/debug.log")
->>>>>>> master
+
 
 LOGGING = {
     'version': 1,
