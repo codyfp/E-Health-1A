@@ -47,6 +47,12 @@ class UserProfile(models.Model):
     is_patient          = models.BooleanField(default=False)
 
     def __str__(self):
+        # if self.is_patient:
+        #     return "patient"
+        # elif self.is_doctor:
+        #     return "doctor"
+        # else:
+        #     return "neither"
         return self.first_name + " " + self.last_name
 
 class Certificate(models.Model):
