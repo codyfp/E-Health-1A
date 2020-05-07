@@ -1,12 +1,62 @@
-
+{% extends 'base.html' %}
 {% load static %}
 {% block content %}
-
+<div class="welcomeBox" style="margin-top: 150px; margin-left: 25%; margin-right:25%;">
+    <div>
+        <h1 style="text-align: center">Welcome, {{ user.username }}</h1>
+    </div>
+    <div style="margin-top: 20px;">
+        <p>
+            <center>Health online offers a means of effectively communicating with local patients. You can start by selecting one of the desired functions below</center>
+        </p>
+    </div>
+    <div>
+        <p style="    font-size: 1.25rem;
+    font-weight: 300;
+"></p>
+    </div>
+</div>
+<div class="functions" style="margin-top: 30px; 
+                            margin-left:10%; margin-right:10%;">
+    <div class="card-deck d-flex justify-content-around flex-wrap">
+        <div class="card text-center" style=" min-width:330px;">
+            <div class="card-header"><b>
+                    Consultations 👨‍⚕️
+                </b></div>
+            <div class="card-body">
+                <h5 class="card-title">Setup an appointment time for patients</h5>
+                <p class="card-text" style="font-size: 16px;">To create an appointment slot for patients to book you will need the following information including - location, date & time frame.</p>
+                <a href="#" class="btn btn-primary w-100">Make an appointment</a>
+            </div>
+        </div>
+        <div class="card text-center" style=" min-width:330px;">
+            <div class="card-header"><b>
+                    View Schedule  &#128197
+                </b></div>
+            <div class="card-body">
+                <h5 class="card-title">View appointments that have been booked from patients</h5>
+                <p class="card-text" style="font-size: 16px;">View appointments that near-by patients have booked with you</p>
+                <a href="#" class="btn btn-primary w-100">View my schedule</a>
+            </div>
+        </div>
+        <div class="card text-center" style=" min-width:330px;">
+            <div class="card-header"><b>
+                    Inbox  &#128235;
+                </b></div>
+            <div class="card-body">
+                <h5 class="card-title">View messages sent to you</h5>
+                <p class="card-text" style="font-size: 16px;">Our inbox allows you to view and reply to messages sent to you</p>
+                <a href="#" class="btn btn-primary w-100">View my inbox</a>
+            </div>
+        </div>
+    </div>
+</div>
 {% csrf_token %}
 {% if user.is_authenticated %}
 <p>
-<h1>Welcome Doctor </h1> <h2>{{ user.username }}</h2>
-{{% else %}
+    <h1>Welcome Doctor </h1>
+    <h2>{{ user.username }}</h2>
+    {{% else %}
 <h1>User not logged in!</h1>
 {% endif %}
 </p>>
