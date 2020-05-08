@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<div style="margin-top: 100px; margin-left:12%; margin-right:12%;">
+    <div style="margin-bottom: 10px;">
+        <p>
+            <button class="btn btn-dark" type="button" data-toggle="collapse" data-target="#collapseForm" aria-expanded="false" aria-controls="collapseExample">
+                Add a new appointment
+            </button>
+        </p>
+        <div class="collapse" id="collapseForm">
+            <div class="appointment form" style="width: 450px;
+        background-color: #E2E2E2;
+        -webkit-border-radius: 10px; padding-bottom: 20px;">
+                <form>
+                    <div class="form-group row" style="padding-left: 15px;">
+                        <label for="staticUser" class="col-2 col-form-label">Username:</label>
+                        <div class="col-10">
+                            <input type="text" readonly class="form-control-plaintext" id="staticUser" value="this.username">
+                        </div>
+                    </div>
+                    <label for="date" class="col-2 col-form-label">Date</label>
+                    <div class="col-12">
+                        <input class="form-control" type="date" value="2011-08-19" id="date">
+                    </div>
+                    <label for="example-time-input" class="col-2 col-form-label">Time</label>
+                    <div class="col-12">
+                        <input class="form-control" type="time" value="13:45:00" id="example-time-input">
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+    <div>
+
+
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>Larry</td>
+                    <td>the Bird</td>
+                    <td>@twitter</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

@@ -111,5 +111,9 @@ def test_view(request):
     return render(request, 'test.html', {})
 
 
+def appointment_view(request, *args, **kwargs):
+    
+    return render(request, 'appointment.html', {})
+
 def register_view(request, *args, **kwargs):
     return render(request, "register.html", {})
