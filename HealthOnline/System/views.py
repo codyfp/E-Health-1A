@@ -118,6 +118,10 @@ def patient_panel_view(request, user_name):
 
 
 
+def appointment_view(request, *args, **kwargs):
+    
+    return render(request, 'appointment.html', {})
+
 def register_view(request, *args, **kwargs):
     return render(request, "register.html", {})
     

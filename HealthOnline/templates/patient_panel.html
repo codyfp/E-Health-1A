@@ -1,5 +1,6 @@
 {% extends 'patient_base.html' %}
 
+{% extends 'base.html' %}
 {% load static %}
 {% block content %}
 <div class="welcomeBox" style="margin-top: 150px; margin-left: 25%; margin-right:25%;">
@@ -52,6 +53,11 @@
         </div>
     </div>
 </div>
+<<<<<<< HEAD
+=======
+{% block content %}
+
+>>>>>>> 055221a38600332fe0c35af55f61e6131b4c4817
 {% csrf_token %}
 {% if user.is_authenticated %}
 <p>
