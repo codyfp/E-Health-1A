@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from System import views
+from django_private_chat import urls as django_private_chat_urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,6 +25,7 @@ urlpatterns = [
     path('register/', views.register_view, name='register'),
     path('register/patient/', views.patient_register_view, name='patient_register'),
     path('register/doctor/', views.doctor_register_view, name='doctor_register'),
+    path('chat/', views.chat_view, name="chat"),
     
     #test page for frontend
     path('test/', views.test_view, name='test'),

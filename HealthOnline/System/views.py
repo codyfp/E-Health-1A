@@ -21,6 +21,9 @@ logger = logging.getLogger('__name__')
 def home_view(request, *args, **kwargs):
     return render(request, "home.html", {})
 
+def chat_view(request, *args, **kwargs):
+    return render(request, "chat.html", {})
+
 def login_view(request, *args, **kwargs):
     form = LoginForm()
 
