@@ -1,0 +1,43 @@
+{% extends 'doctor_base.html' %}
+
+{% load static %}
+{% block content %}
+
+<body class="background-image">
+
+    <div class="registration container prescription">
+        <div class="headerunderline">
+            <h1 style="text-align: center">Create a Prescription</h1>
+        </div>
+        <form class="prescriptionForm" method="POST" action="">
+            {% csrf_token %}
+            <div class="form-group form-row">
+                <div class="form group col-6">
+                    {{form.patient_first_name.label}}
+                    {{form.patient_first_name}}
+                </div>
+                <div class="form group col-6">
+                    {{form.patient_last_name.label}}
+                    {{form.patient_last_name}}
+                </div>
+            </div>
+            <div class="form-group">
+                {{form.medication.label}}
+                {{form.medication}}
+            </div>
+            <div class="form-group">
+                {{form.description.label}}
+                {{form.description}}
+            </div>
+            <div class="form-group">
+                {{form.prescriptionFile.label}}<br>
+                {{form.prescriptionFile}}
+            </div>
+            <div style="text-align:center">
+                <button type="submit" class="btn btn-secondary">Send Prescription</button>
+            </div>
+
+        </form>
+    </div>
+</body>
+{% endblock %}

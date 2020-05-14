@@ -12,20 +12,23 @@
 
 <body>
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="{% url 'home'%}">Health Online</a>
+        <a class="navbar-brand" href="{% url 'doctor_panel' user.username %}">Health Online</a>
         <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav nav-fill ">
                 <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'home'%}">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="{% url 'doctor_panel' user.username %}">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="{% url 'login'%}">Messaging</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'patient_register'%}">Shedule</a>
+                    <a class="nav-link" href="{% url 'doctor_prescription' user.username %}">Prescriptions</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'patient_register'%}">Schedule</a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="{% url 'doctor_register'%}">Change account details</a>

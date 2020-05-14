@@ -22,22 +22,22 @@
     <div class="card-deck d-flex justify-content-around flex-wrap">
         <div class="card text-center" style=" min-width:330px;">
             <div class="card-header"><b>
-                    Consultations 👨‍⚕️
+                    Find a Doctor 👨‍⚕️
                 </b></div>
             <div class="card-body">
-                <h5 class="card-title">Setup an appointment time for patients</h5>
+                <h5 class="card-title">Search for a doctor</h5>
                 <p class="card-text" style="font-size: 16px;">To create an appointment slot for patients to book you will need the following information including - location, date & time frame.</p>
-                <a href="#" class="btn btn-primary w-100">Make an appointment</a>
+                <a href="#" class="btn btn-primary w-100">Search</a>
             </div>
         </div>
         <div class="card text-center" style=" min-width:330px;">
             <div class="card-header"><b>
-                    View Schedule  &#128197
+                    Prescriptions  &#128197
                 </b></div>
             <div class="card-body">
-                <h5 class="card-title">View appointments that have been booked from patients</h5>
-                <p class="card-text" style="font-size: 16px;">View appointments that near-by patients have booked with you</p>
-                <a href="#" class="btn btn-primary w-100">View my schedule</a>
+                <h5 class="card-title">Access prescription documents</h5>
+                <p class="card-text" style="font-size: 16px;">View current and past prescriptions sent from doctors</p>
+                <a href="{% url 'patient_prescription' user.username %}" class="btn btn-primary w-100">Prescriptions</a>
             </div>
         </div>
         <div class="card text-center" style=" min-width:330px;">
