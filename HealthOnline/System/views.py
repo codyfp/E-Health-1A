@@ -1,6 +1,12 @@
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
+<<<<<<< HEAD
 from django.contrib.auth.models import User, Group
+=======
+from django.contrib.auth.models import User
+from django.contrib.auth import logout
+
+>>>>>>> 243b20c3491fd508bfc0da80e8d16830f862367d
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
@@ -225,3 +231,22 @@ def register_view(request, *args, **kwargs):
 def test_view(request):
 
     return render(request, 'test.html', {})
+<<<<<<< HEAD
+=======
+
+
+def appointment_view(request, *args, **kwargs):
+    
+    return render(request, 'appointment.html', {})
+def schedule_view(request, *args, **kwargs):
+    
+    return render(request, 'schedule.html', {})
+
+def register_view(request, *args, **kwargs):
+    return render(request, "register.html", {})
+
+def logout_view(request):
+    logout(request)
+    messages.info(request, "Logged out successfully!")
+    return redirect('home')
+>>>>>>> 243b20c3491fd508bfc0da80e8d16830f862367d
