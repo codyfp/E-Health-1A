@@ -70,6 +70,7 @@ class LoginForm(forms.Form):
 class PasswordResetForm(PasswordResetForm):
     email = forms.EmailField(max_length=254,widget=forms.EmailInput(attrs={'class':'form-control', 'autocomplete': 'email', 'placeholder':'Email address'}), label_suffix='')
 
+<<<<<<< HEAD
 class ConsultationForm(forms.Form):
     doc_username = forms.CharField(label='doctor', max_length=20, widget=forms.TextInput(attrs={
         'class': 'form-control', 'placeholder':'Doctor Username'
@@ -90,3 +91,19 @@ class ConsultationForm(forms.Form):
 
     
         
+=======
+class PrescriptionForm(forms.Form):
+    patient_first_name = forms.CharField(label='Patient First Name', max_length=100, label_suffix='',
+        widget=forms.TextInput(attrs={'class':'form-control'}) )
+    patient_last_name = forms.CharField(label='Patient Last Name', max_length=100, label_suffix='',
+        widget=forms.TextInput(attrs={'class':'form-control'}) )
+    medication = forms.CharField(label='Medication', max_length=100, label_suffix='',
+        widget=forms.TextInput(attrs={'class':'form-control'}) )
+    description = forms.Field(label='Directions for use', label_suffix='',
+        widget=forms.Textarea(attrs={'class':'form-control'}) )
+    prescriptionFile = forms.FileField(label='Upload prescription document', label_suffix='',
+        widget=forms.FileInput(attrs={'class':''}) )
+     
+    class Meta:
+        fields =['patient', 'medication', 'description', 'prescriptionFile', 'doctor', 'dateTime']
+>>>>>>> 8503a5717d65260ef02e3e0f98876becd863eaed

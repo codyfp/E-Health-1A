@@ -1,0 +1,62 @@
+{% extends 'patient_base.html' %}
+{% load static %}
+{% block content %}
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+
+<body>
+    <div style="margin-top: 100px; margin-left:12%; margin-right:12%;">
+        <div id="accordion">
+
+
+
+            <div class="card" style="min-width: 90%">
+                <div class="card-header">
+                    <a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo">
+                        Collapsible Group Item #2
+                    </a>
+                </div>
+                <div id="collapseTwo" class="collapse" data-parent="#accordion">
+                    <div class="card-body">
+                        Lorem ipsum..Lorem ipsum..Lorem ipsum..
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" style="min-width: 90%">
+                <div class="card-header">
+                    <a class="collapsed card-link" data-toggle="collapse" href="#collapseThree">
+                        Collapsible Group Item #3
+                    </a>
+                </div>
+                <div id="collapseThree" class="collapse" data-parent="#accordion">
+                    <div class="card-body">
+                        Lorem ipsum..
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        
+        <!--above is to test with no backend, below is to dynamically create cards-->
+        {% for prescription in prescriptions %}
+        <div class="card" style="min-width: 90%">
+            <div class="card-header">
+                <a class="card-link" data-toggle="collapse" href="#collapseOne">
+                    {{ prescription.date }}
+                    {{ prescription.medication }}
+                    {{ prescription.doctor }}
+                </a>
+            </div>
+            <div id="collapseOne" class="collapse show" data-parent="#accordion">
+                <div class="card-body">
+                    {{prescription.as_table}}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+</body>
+{% endblock %}
