@@ -10,6 +10,7 @@ urlpatterns = [
     path('register/patient/', views.patient_register_view, name='patient_register'),
     path('register/doctor/', views.doctor_register_view, name='doctor_register'),
     path('appointment/', views.appointment_view, name='appointment'),
+    path('schedule/', views.schedule_view, name='schedule'),
     path('doctor-<str:user_name>', views.doctor_panel_view, name='doctor_panel'), # You might notice the url   extension looks funny in this one. This is dynamic
                                                                                   # url conf. in django. Google it if you haven't heard it before.
                                                                                   # Note: user_name is a parameter here and it is passed to associated view function.
