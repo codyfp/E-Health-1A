@@ -14,17 +14,21 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
-from System import views
+from django.urls import path, include
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.home_view, name='home'),
-    path('login/', views.login_view, name='login'),
-    path('register/', views.register_view, name='register'),
-    path('register/patient/', views.patient_register_view, name='patient_register'),
-    path('register/doctor/', views.doctor_register_view, name='doctor_register'),
+    path('', include('System.urls'))
     
-    #test page for frontend
-    path('test/', views.test_view, name='test'),
+    
 ]
+
+'''
+I carried the urls associated with our core app System to System file. 
+I was testing one thing but at the end I think this is more organized. 
+I think Aryan did this url conf thing like this in the begining but then when 
+I changed the file structure it was lost so here it is again. Just go to urls.py
+document in System folder to view the rest of the urls and add urls associated with the
+System over there from now on.
+'''
