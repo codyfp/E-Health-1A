@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.utils import timezone
 
 # Create your models here.
 
@@ -47,13 +48,7 @@ class UserProfile(models.Model):
     is_patient          = models.BooleanField(default=False)
 
     def __str__(self):
-        # if self.is_patient:
-        #     return "patient"
-        # elif self.is_doctor:
-        #     return "doctor"
-        # else:
-        #     return "neither"
-        return self.first_name + " " + self.last_name
+        return self.user.username + "_profile"
 
 class Certificate(models.Model):
     doctor          = models.ForeignKey(User, blank=False, null=False, on_delete=models.PROTECT)
@@ -84,8 +79,17 @@ class Prescription(models.Model):
 class Consultation(models.Model):
     doctor      = models.ForeignKey(User, related_name='doctor_consultation', blank=False, null=False, on_delete=models.PROTECT)
     patient     = models.ForeignKey(User, related_name='patient_consultation', blank=False, null=False, on_delete=models.PROTECT)
-    description = models.CharField(max_length=1000, null=True, blank=True)
-    dateTime    = models.DateTimeField(null=False, blank=False)
+    complaint   = models.CharField(max_length=100, null=True, blank=True)
+    date        = models.DateField(null=False, blank=False, default=timezone.now().date())
+    time        = models.TimeField(null=False, blank=False, default=timezone.now().time())
+    is_active   = models.BooleanField(default=True)
+    is_complete = models.BooleanField(default=False)
+
+    def deactivate(self):
+        self.is_active = False
+
+    def mark_complete(self):
+        self.is_complete = True
     
     def get_doctor(self):
         return self.doctor.username
@@ -94,4 +98,5 @@ class Consultation(models.Model):
         return self.patient.username
 
     def __str__(self):
-        return str(self.get_doctor()) + "_" + str(self.get_patient()) + "_" + str(self.dateTime)
+        return str(self.get_doctor()) + "_" + str(self.get_patient()) + "_" + str(self.date) + "_" +str(self.time)
+    
