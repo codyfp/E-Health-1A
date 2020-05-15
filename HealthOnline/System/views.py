@@ -1,25 +1,18 @@
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
-<<<<<<< HEAD
 from django.contrib.auth.models import User, Group
-=======
-from django.contrib.auth.models import User
 from django.contrib.auth import logout
-
->>>>>>> 243b20c3491fd508bfc0da80e8d16830f862367d
+from django.utils import timezone
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
+from django.core.mail import EmailMessage
 
+from django.conf import settings
 
 from System.forms import *
-<<<<<<< HEAD
 from System.models import *
 from System.decorators import unauthenticated_user, allowed_users
-=======
-from System.models import UserProfile, Prescription
-
->>>>>>> 8503a5717d65260ef02e3e0f98876becd863eaed
 
 import logging
 # Log file configuration
@@ -48,25 +41,18 @@ def login_view(request, *args, **kwargs):
             user_profile = UserProfile.objects.get(user=user)
             # I added this statement to redirect user to doctor 
             # panel if it is a doctor and to patient panel if patient.
-<<<<<<< HEAD
             
             if user_profile.is_doctor:
-=======
-            if(user_profile.is_doctor == True):
->>>>>>> 8503a5717d65260ef02e3e0f98876becd863eaed
                 user_name = user.username
                 return redirect('doctor_panel', user_name=user_name) # This is where I pass the dynamic url argument for doctor panel
-            else:
+            elif user_profile.is_patient:
                 user_name = user.username
                 return redirect('patient_panel', user_name=user_name) # This is where I pass the dynamic url argument for patient panel
-<<<<<<< HEAD
             else: 
                 logger.debug(user_profile.is_doctor)
                 logger.debug(user_profile.is_patient)
-                return redirect('home')
+                return redirect('admin')
                 
-=======
->>>>>>> 8503a5717d65260ef02e3e0f98876becd863eaed
         else:
             messages.info(request, 'Username OR password is incorrect')
             logger.debug('User is not found')
@@ -90,13 +76,9 @@ def doctor_register_view(request):
             doctor.is_doctor = True
             doctor.organization = form.cleaned_data.get('organization')
             doctor.save()
-<<<<<<< HEAD
             group, created = Group.objects.get_or_create(name='Doctors')
             user.groups.add(group)
             return redirect('login')
-=======
-            return redirect('home')
->>>>>>> 8503a5717d65260ef02e3e0f98876becd863eaed
         else:
             logger.debug('Form is invalid')
             logger.debug(form.errors.as_data())
@@ -117,13 +99,9 @@ def patient_register_view(request):
             patient = UserProfile.objects.create(user=user)
             patient.is_patient = True
             patient.save()
-<<<<<<< HEAD
             group, created = Group.objects.get_or_create(name='Patients')
             user.groups.add(group)
             return redirect('login')
-=======
-            return redirect('home')
->>>>>>> 8503a5717d65260ef02e3e0f98876becd863eaed
         else:
             logger.debug('Form is invalid')
             logger.debug(form.errors.as_data())
@@ -144,27 +122,6 @@ def doctor_panel_view(request, user_name):
     context = {'user':doctor}
     return render(request, 'doctor_panel.html', context)
 
-def doctor_prescription_view(request, user_name):
-    doctor = request.user
-
-    form = PrescriptionForm()
-    logger.debug(form)
-    
-    if request.method == 'POST':
-        form = PrescriptionForm(request.POST)
-        if form.is_valid():
-            prescription = form.save()
-            newPrescription = Prescription.objects.create()
-            
-            newPrescription.save()
-            return redirect('prescriptionvalid')
-        else:
-            logger.debug('Form is invalid')
-            logger.debug(form.errors.as_data())
-
-    context = {'form':form}
-    return render(request, 'doctor_prescription.html', context)
-
 # This is the basic patient panel. 
 # It currently just displayes which patient is logged in.
 @login_required(login_url='login')
@@ -175,7 +132,6 @@ def patient_panel_view(request, user_name):
     context = {'user': patient}
     return render(request, 'patient_panel.html', context)
 
-<<<<<<< HEAD
 @login_required(login_url='login')
 def appointment_view(request, user_name,*args, **kwargs):
     
@@ -216,14 +172,60 @@ def schedule_view(request, user_name,*args, **kwargs):
 
     context = {'user_appointments': user_appointments}
     return render(request, 'schedule.html', context)
-=======
-def patient_prescription_view(request, user_name):
-    prescriptions = Prescription.objects.filter() #use this to filter ones needed
-                                                #etc...filter(published_date__lte=timezone.now()).order_by('published_date') 
-    return render(request, 'patient_prescription.html', {'prescriptions': prescriptions})
 
->>>>>>> 8503a5717d65260ef02e3e0f98876becd863eaed
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['Patients', 'Doctor'])
+def list_prescription_view(request, user_name):
+    user = User.objects.get(username=user_name)
+    user_profile = UserProfile.objects.get(user=user)
+    
+    if user_profile.is_doctor:
+        prescriptions = Prescription.objects.filter(doctor=user)
+    else:
+        prescriptions = Prescription.objects.filter(patient=user)
+    
+    
+    if request.method == 'POST':
+        prescription = Prescription.objects.get(id=request.POST['prescription_id'])
+        body = 'Your prescription by Dr. ' + prescription.doctor.first_name + " " + prescription.doctor.last_name
+        email = EmailMessage(subject='Health Online Prescription',
+                             body=body,  
+                             to=[user.email])
+        email.attach_file(settings.MEDIA_ROOT + str(prescription.prescription_file))
+        email.send()
+        messages.info(request, 'Email Sent')
+    
+    
+    context = {'prescriptions': prescriptions,
+                'is_doctor':user_profile.is_doctor}
+    return render(request, 'patient_prescription.html', context)
 
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['Doctors'])
+def create_prescription_view(request, user_name, *args, **kwargs):
+    form = PrescriptionForm()
+    doctor = User.objects.get(username=user_name)
+    if request.method == 'POST':
+        form = PrescriptionForm(request.POST, request.FILES)
+        if form.is_valid():
+            try:
+                patient = User.objects.get(username=form.cleaned_data.get('patient_username'))
+                prescription = Prescription(doctor=doctor, patient=patient, dateTime=timezone.now(),
+                medication=form.cleaned_data.get('medication'), 
+                description=form.cleaned_data.get('description'),
+                prescription_file=request.FILES['prescription_file'])
+                prescription.save()
+                return redirect('doctor_panel', user_name=user_name)
+            except User.DoesNotExist:
+                messages.info(request, 'No User Found. Please try again.')
+        else:
+            logger.debug(form.errors.as_data())
+
+    context = {'form':form}
+    return render(request, 'doctor_prescription.html', context)
+
+
+'''
 def register_view(request, *args, **kwargs):
     return render(request, "register.html", {})
     
@@ -231,9 +233,6 @@ def register_view(request, *args, **kwargs):
 def test_view(request):
 
     return render(request, 'test.html', {})
-<<<<<<< HEAD
-=======
-
 
 def appointment_view(request, *args, **kwargs):
     
@@ -244,9 +243,8 @@ def schedule_view(request, *args, **kwargs):
 
 def register_view(request, *args, **kwargs):
     return render(request, "register.html", {})
-
+'''
 def logout_view(request):
     logout(request)
     messages.info(request, "Logged out successfully!")
     return redirect('home')
->>>>>>> 243b20c3491fd508bfc0da80e8d16830f862367d

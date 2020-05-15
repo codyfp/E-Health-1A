@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
-from django.utils import timezone
+
 
 # Create your models here.
 
@@ -52,7 +52,7 @@ class UserProfile(models.Model):
 
 class Certificate(models.Model):
     doctor          = models.ForeignKey(User, blank=False, null=False, on_delete=models.PROTECT)
-    certificate     = models.FileField(upload_to=('user_'+str(id)+'/Certificate/'))
+    certificate     = models.FileField(upload_to=('user_'+str(doctor)+'/Certificate/'))
     
     def get_doctor(self):
         return self.doctor.username
@@ -61,11 +61,12 @@ class Certificate(models.Model):
         return self.get_doctor() + "_medical_certificate"
 
 class Prescription(models.Model):
-    doctor          = models.ForeignKey(User, related_name='doctor_prescription', blank=False, null=False, on_delete=models.PROTECT)
-    patient         = models.ForeignKey(User, related_name='patient_prescription', blank=False, null=False, on_delete=models.PROTECT)
-    dateTime        = models.DateTimeField(null=False, blank=False)
-    drugs           = models.CharField(max_length=400, null=True, blank=True)
-    notes           = models.CharField(max_length=500, null=True, blank=True)
+    doctor            = models.ForeignKey(User, related_name='doctor_prescription', blank=False, null=False, on_delete=models.PROTECT)
+    patient           = models.ForeignKey(User, related_name='patient_prescription', blank=False, null=False, on_delete=models.PROTECT)
+    dateTime          = models.DateTimeField(null=True, blank=True)
+    medication        = models.CharField(max_length=400, null=True, blank=True)
+    description       = models.CharField(max_length=500, null=True, blank=True)
+    prescription_file = models.FileField(upload_to='prescriptions/', null=True)
     
     def get_doctor(self):
         return self.doctor.username
@@ -80,8 +81,8 @@ class Consultation(models.Model):
     doctor      = models.ForeignKey(User, related_name='doctor_consultation', blank=False, null=False, on_delete=models.PROTECT)
     patient     = models.ForeignKey(User, related_name='patient_consultation', blank=False, null=False, on_delete=models.PROTECT)
     complaint   = models.CharField(max_length=100, null=True, blank=True)
-    date        = models.DateField(null=False, blank=False, default=timezone.now().date())
-    time        = models.TimeField(null=False, blank=False, default=timezone.now().time())
+    date        = models.DateField(null=False, blank=False) 
+    time        = models.TimeField(null=False, blank=False)
     is_active   = models.BooleanField(default=True)
     is_complete = models.BooleanField(default=False)
 

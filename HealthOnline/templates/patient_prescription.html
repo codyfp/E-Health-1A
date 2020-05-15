@@ -10,7 +10,7 @@
         <div id="accordion">
 
 
-
+            <!--
             <div class="card" style="min-width: 90%">
                 <div class="card-header">
                     <a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo">
@@ -38,20 +38,37 @@
             </div>
 
         </div>
+        -->
         
         <!--above is to test with no backend, below is to dynamically create cards-->
+        {% for message in messages %}
+            <p id="messages">{{message}}</p>
+        {% endfor %}
         {% for prescription in prescriptions %}
         <div class="card" style="min-width: 90%">
             <div class="card-header">
                 <a class="card-link" data-toggle="collapse" href="#collapseOne">
-                    {{ prescription.date }}
-                    {{ prescription.medication }}
-                    {{ prescription.doctor }}
+                    {% if is_doctor %}
+                        {{ prescription.patient.first_name }} {{ prescription.patient.last_name }}
+                        {{ prescription.dateTime|date }}
+                    {% else %}
+                        Dr. {{ prescription.doctor.first_name }} {{ prescription.doctor.last_name }}
+                        {{ prescription.dateTime|date }}
+                    {% endif %}
                 </a>
             </div>
             <div id="collapseOne" class="collapse show" data-parent="#accordion">
                 <div class="card-body">
-                    {{prescription.as_table}}
+                    <p>{{prescription.medication}}</p>
+                    <p>{{prescription.description}}</p>
+                    
+                    <p>
+                        <form name='send_prescription' action='' method='POST'>
+                            {% csrf_token %}
+                            <input type='hidden' name='prescription_id' value="{{ prescription.id }}">
+                            Send prescription to your email: <button type="submit" class="btn btn-secondary">Send</button>
+                        </form>
+                    </p>
                 </div>
             </div>
         </div>

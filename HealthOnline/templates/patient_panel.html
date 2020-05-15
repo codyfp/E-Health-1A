@@ -32,27 +32,28 @@
             <div class="card-body">
                 <h5 class="card-title">Search for a doctor</h5>
                 <p class="card-text" style="font-size: 16px;">To create an appointment slot for patients to book you will need the following information including - location, date & time frame.</p>
-<<<<<<< HEAD
-                <a href="{% url 'appointments' user_name=user.username %}" class="btn btn-primary w-100">Make an appointment</a>
-=======
                 <a href="#" class="btn btn-primary w-100">Search</a>
->>>>>>> 8503a5717d65260ef02e3e0f98876becd863eaed
             </div>
+            
+        </div>
+        <div class="card text-center" style=" min-width:330px;">
+            <div class="card-header"><b>
+                    Consultations
+                </b></div>
+                <div class="card-body">
+                    <h5 class="card-title">Book a Consultation</h5>
+                    <p class="card-text" style="font-size: 16px;">Book an appointment with doctor.</p>
+                    <a href="{% url 'appointments' user.username %}" class="btn btn-primary w-100">Book</a>
+                </div>
         </div>
         <div class="card text-center" style=" min-width:330px;">
             <div class="card-header"><b>
                     Prescriptions  &#128197
                 </b></div>
             <div class="card-body">
-<<<<<<< HEAD
-                <h5 class="card-title">View appointments that have been booked from patients</h5>
-                <p class="card-text" style="font-size: 16px;">View appointments that near-by patients have booked with you</p>
-                <a href="{% url 'schedule' user_name=user.username %}" class="btn btn-primary w-100">View my schedule</a>
-=======
-                <h5 class="card-title">Access prescription documents</h5>
+                <h5 class="card-title">View Prescriptions</h5>
                 <p class="card-text" style="font-size: 16px;">View current and past prescriptions sent from doctors</p>
-                <a href="{% url 'patient_prescription' user.username %}" class="btn btn-primary w-100">Prescriptions</a>
->>>>>>> 8503a5717d65260ef02e3e0f98876becd863eaed
+                <a href="{% url 'list_prescription' user.username %}" class="btn btn-primary w-100">Prescriptions</a>
             </div>
         </div>
         <div class="card text-center" style=" min-width:330px;">
@@ -76,3 +77,4 @@
 {% endif %}
 
 {% endblock %}
+
