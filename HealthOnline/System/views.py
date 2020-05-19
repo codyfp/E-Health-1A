@@ -61,7 +61,13 @@ def login_view(request, *args, **kwargs):
     return render(request, 'login.html', context)
 
 
+
+def chat_view(request, *args, **kwargs):
+    return render(request, "chat.html", {})
+
+
 # Registration Views
+
 @unauthenticated_user
 def doctor_register_view(request):
     form = DoctorSignUpForm()
