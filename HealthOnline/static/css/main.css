@@ -83,3 +83,11 @@ body{
     
     margin-top: 40px;
 }
+.appointmentform.container{
+     margin-top: 150px;
+        width: 600px;
+        background-color: #E2E2E2;
+        -webkit-border-radius: 10px;/*changes edges to curves*/
+    padding-bottom: 20px;
+    padding-top: 10px;
+}

@@ -1,4 +1,9 @@
 *.pyc
+<<<<<<< HEAD
+db.sqlite3
+*.log
+=======
 *.log
 db.sqlite3
 env1/
+>>>>>>> master
