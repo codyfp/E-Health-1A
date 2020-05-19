@@ -82,8 +82,18 @@ body{
     
     margin-top: 40px;
 }
+<<<<<<< HEAD
+.appointmentform.container{
+     margin-top: 150px;
+        width: 600px;
+        background-color: #E2E2E2;
+        -webkit-border-radius: 10px;/*changes edges to curves*/
+    padding-bottom: 20px;
+    padding-top: 10px;
+=======
 
 .background-image{
     background: url("images/background2.jpg") 50% 0 no-repeat fixed;
     background-repeat: repeat-y;
+>>>>>>> 8503a5717d65260ef02e3e0f98876becd863eaed
 }

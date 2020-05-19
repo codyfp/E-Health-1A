@@ -2,6 +2,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, Pass
 from django.contrib.auth.models import User
 from django import forms
 from django.db import transaction
+from System.models import Consultation, Prescription
 
 class DoctorSignUpForm(UserCreationForm):
     
@@ -69,17 +70,32 @@ class LoginForm(forms.Form):
 class PasswordResetForm(PasswordResetForm):
     email = forms.EmailField(max_length=254,widget=forms.EmailInput(attrs={'class':'form-control', 'autocomplete': 'email', 'placeholder':'Email address'}), label_suffix='')
 
+class ConsultationForm(forms.Form):
+    doc_username = forms.CharField(label='doctor', max_length=20, widget=forms.TextInput(attrs={
+        'class': 'form-control', 'placeholder':'Doctor Username'
+    }) )
+    date = forms.DateField(label='date', widget=forms.DateInput(attrs={
+        'class': 'form-control', 'type': 'date', 'id':'date'      
+    }) )
+    time = forms.TimeField(label='time', widget=forms.TimeInput(attrs={
+        'class': 'form-control', 'type':'time', 'value':'00:00:00' ,'id':'example-time-input'      
+    }) )
+    complaint = forms.CharField(label='complaint', max_length=100, widget=forms.TextInput(attrs={
+        'class': 'form-control', 'placeholder':'What is you complaint? (max. 100 characters)'
+    }) )
+    
+    class Meta:
+        model = Consultation
+        fields = ['doc_username','patient', 'date', 'time' ,'complaint']
+
+
 class PrescriptionForm(forms.Form):
-    patient_first_name = forms.CharField(label='Patient First Name', max_length=100, label_suffix='',
-        widget=forms.TextInput(attrs={'class':'form-control'}) )
-    patient_last_name = forms.CharField(label='Patient Last Name', max_length=100, label_suffix='',
+    patient_username = forms.CharField(label='Patient User Name', max_length=100, label_suffix='',
         widget=forms.TextInput(attrs={'class':'form-control'}) )
     medication = forms.CharField(label='Medication', max_length=100, label_suffix='',
         widget=forms.TextInput(attrs={'class':'form-control'}) )
     description = forms.Field(label='Directions for use', label_suffix='',
         widget=forms.Textarea(attrs={'class':'form-control'}) )
-    prescriptionFile = forms.FileField(label='Upload prescription document', label_suffix='',
-        widget=forms.FileInput(attrs={'class':''}) )
+    prescription_file = forms.FileField(label='Upload prescription document', label_suffix='',
+        widget=forms.FileInput(attrs={'class':'', 'name':'prescription_file' }))
      
-    class Meta:
-        fields =['patient', 'medication', 'description', 'prescriptionFile', 'doctor', 'dateTime']
