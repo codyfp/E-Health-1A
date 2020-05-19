@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'System',
+    'django_private_chat',
 ]
 
 MIDDLEWARE = [
@@ -134,3 +135,8 @@ try:
     from .settings_local import *
 except Exception as e:
     print(e)
+
+#Chat
+CHAT_WS_SERVER_HOST = 'localhost'
+CHAT_WS_SERVER_PORT = 5002
+CHAT_WS_SERVER_PROTOCOL = 'ws'
