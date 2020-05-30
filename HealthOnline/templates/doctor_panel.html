@@ -1,6 +1,9 @@
 {% extends 'doctor_base.html' %}
 {% load static %}
 {% block content %}
+
+{% csrf_token %}
+{% if user.is_authenticated %}
 <div class="welcomeBox" style="margin-top: 150px; margin-left: 25%; margin-right:25%;">
     <div>
         <h1 style="text-align: center">Welcome, {{ user.username }}</h1>
@@ -51,16 +54,9 @@
         </div>
     </div>
 </div>
-{% csrf_token %}
-{% if user.is_authenticated %}
-<p>
-    <h1>Welcome Doctor </h1>
-    <h2>{{ user.username }}</h2>
-    {{% else %}
-<h1>User not logged in!</h1>
+{{% else %}
+    <h1>User not logged in!</h1>
 {% endif %}
-</p>>
-<p>
-<button type="submit">Log Out</button>
-</p>
+
+
 {% endblock %}

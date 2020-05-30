@@ -28,10 +28,13 @@
                     <a class="nav-link" href="{% url 'create_prescription' user.username %}">Prescribe</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'patient_register'%}">Schedule</a>
+                    <a class="nav-link" href="{% url 'schedule' user.username %}">Schedule</a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="{% url 'doctor_register'%}">Change account details</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'logout'%}">Log Out</a>
                 </li>
             </ul>
         </div>

@@ -7,6 +7,7 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.core.mail import EmailMessage
+import datetime
 
 from django.conf import settings
 
@@ -18,7 +19,7 @@ import logging
 # Log file configuration
 logger = logging.getLogger('__name__')
 
-
+@unauthenticated_user
 def home_view(request, *args, **kwargs):
     return render(request, "home.html", {})
 
@@ -170,13 +171,46 @@ def appointment_view(request, user_name,*args, **kwargs):
 @login_required(login_url='login')
 def schedule_view(request, user_name,*args, **kwargs):
     user      = User.objects.get(username=user_name)
-    is_doctor = UserProfile.objects.get(user=user).is_doctor
-    if is_doctor:
-        user_appointments = Consultation.objects.filter(doctor=user)
-    else:
-        user_appointments = Consultation.objects.filter(patient=user)
 
-    context = {'user_appointments': user_appointments}
+    date = timezone.now().date()
+    wk_day = date.weekday()
+    date -= datetime.timedelta(days=wk_day)
+    
+    dates = []
+    for i in range(0, 7):
+        dates.append(date)
+        date += datetime.timedelta(days=1)
+    for dt in dates: logger.debug(dt)
+    
+    is_doctor = UserProfile.objects.get(user=user).is_doctor
+    
+    if is_doctor:
+        monday = Consultation.objects.filter(doctor=user, date=dates[0])
+        tuesday = Consultation.objects.filter(doctor=user, date=dates[1])
+        wednesday = Consultation.objects.filter(doctor=user, date=dates[2])
+        thursday = Consultation.objects.filter(doctor=user, date=dates[3])
+        friday = Consultation.objects.filter(doctor=user, date=dates[4])
+        saturday = Consultation.objects.filter(doctor=user, date=dates[5])
+        sunday = Consultation.objects.filter(doctor=user, date=dates[6])
+
+    else:
+        monday = Consultation.objects.filter(patient=user, date=dates[0])
+        tuesday = Consultation.objects.filter(patient=user, date=dates[1])
+        wednesday = Consultation.objects.filter(patient=user, date=dates[2])
+        thursday = Consultation.objects.filter(patient=user, date=dates[3])
+        friday = Consultation.objects.filter(patient=user, date=dates[4])
+        saturday = Consultation.objects.filter(patient=user, date=dates[5])
+        sunday = Consultation.objects.filter(patient=user, date=dates[6])
+
+
+    context = { 'monday': monday,
+                'tuesday': tuesday,
+                'wednesday': wednesday,
+                'thursday' : thursday,
+                'friday' : friday,
+                'saturday' : saturday,
+                'sunday' : sunday,
+                }
     return render(request, 'schedule.html', context)
 
 @login_required(login_url='login')
