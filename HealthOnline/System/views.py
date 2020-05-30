@@ -250,6 +250,10 @@ def schedule_view(request, *args, **kwargs):
 def register_view(request, *args, **kwargs):
     return render(request, "register.html", {})
 '''
+
+def profile_view(request, *args, **kwargs):
+    return render(request, "profile.html", {})
+
 def logout_view(request):
     logout(request)
     messages.info(request, "Logged out successfully!")
