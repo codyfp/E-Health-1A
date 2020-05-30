@@ -3,6 +3,7 @@
 {% block content %}
 
 
+
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
 <body style="background-image: url({% static 'images/reg-background4.jpg'%});">
@@ -26,20 +27,28 @@
                 <div class="appointment form" style="width: 450px;
         background-color: #E2E2E2;
         -webkit-border-radius: 10px; padding-bottom: 10px;">
-                    <form>
+                    <form class='ConsultationForm' method="POST" action="">
+                        {% csrf_token %}
                         <div class="form-group row" style="padding-left: 15px;">
-                            <label for="staticUser" class="col-2 col-form-label">Username:</label>
-                            <div class="col-10">
-                                <input type="text" readonly class="form-control-plaintext" id="staticUser" value="this.username">
+                            <label for="doctor" class="col-2 col-form-label">Doctor</label>
+                            <div class="col-12">
+                                {{ form.doc_username }}
+                                <!--<input type="text" readonly class="form-control-plaintext" id="staticUser" value="this.username">-->
                             </div>
                         </div>
-                        <label for="date" class="col-2 col-form-label">Date</label>
+                        <label for="date" class="col-2 col-form-label">Date:</label>
                         <div class="col-12">
-                            <input class="form-control" type="date" value="2011-08-19" id="date">
+                            {{ form.date }}
+                            <!--<input class="form-control" type="date" value="2011-08-19" id="date">-->
                         </div>
-                        <label for="example-time-input" class="col-2 col-form-label">Time</label>
+                        <label for="time" class="col-2 col-form-label">Time:</label>
                         <div class="col-12">
-                            <input class="form-control" type="time" value="13:45:00" id="example-time-input">
+                            {{ form.time }}
+                            <!--<input class="form-control" type="time" value="13:45:00" id="example-time-input">-->
+                        </div>
+                        <label for="complaint" class="col-2 col-form-label">Complaint</label>
+                        <div class="col-12">
+                            {{ form.complaint }}
                         </div>
                         <div class="col-12" style="padding-top:10px;">
 
@@ -52,15 +61,15 @@
                 <div class="appointment form" style="width: 450px;
         background-color: #E2E2E2;
         -webkit-border-radius: 10px; padding-bottom: 10px;">
-                    <form>
+                    <form method="POST" action="">
+                        {% csrf_token %}
                         <label for="date" class="col-2 col-form-label">ID</label>
-                        <div class="col-12">
-                            
-              
-                        <input type="text" class="form-control" id="inlineFormInputName">
-                                      </div>
+                            <div class="col-12">
+                                
+                                <input type="text" name="remove_id" class="form-control" id="inlineFormInputName">
+                            </div>
                         <div class="col-12" style="padding-top:10px;">
-
+                            
                             <button type="submit" class="btn btn-secondary">Submit</button>
                         </div>
                     </form>
@@ -73,15 +82,33 @@
 
             <table class="table table-dark">
                 <thead class="thead-dark">
+                    
                     <tr>
                         <th scope="col">ID</th>
-                        <th scope="col">Username</th>
+                        <th scope="col">Doctor</th>
+                        <th scope="col">Patient</th>
                         <th scope="col">Date</th>
                         <th scope="col">Time</th>
-                        <th scope="col">Capacity</th>
+                        <th scope="col">Complaint</th>
                     </tr>
                 </thead>
+
                 <tbody>
+                
+                {% for appointment in user_appointments %}
+                    {% if appointment.is_active %}
+                    <tr>
+                        <th scope="row">{{appointment.id}}</th>
+                        <td>{{ appointment.doctor.first_name }} {{ appointment.doctor.last_name }}</td>
+                        <td>{{ appointment.patient.username }}</td>
+                        <td>{{ appointment.date}}</td>
+                        <td>{{ appointment.time }}</td>
+                        <td>{{ appointment.complaint }}</td>
+                    </tr>
+                    {% endif %}
+                {% endfor %}
+
+                    <!--
                     <tr>
                         <th scope="row">1</th>
                         <td>Mark</td>
@@ -104,6 +131,7 @@
                         <td>@twitter</td>
                         <td>0/1</td>
                     </tr>
+                -->
                 </tbody>
             </table>
         </div>

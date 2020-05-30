@@ -79,12 +79,9 @@ body{
     padding-bottom: 20px;
     padding-top: 10px;
 }
-.registerForm {
-    margin-top: 40px;
-}
 
-.loginForm{
-    margin-top: 40px;
+.headerunderline{
+    margin-bottom: 40px;
 }
 
 .altSignupLogin {

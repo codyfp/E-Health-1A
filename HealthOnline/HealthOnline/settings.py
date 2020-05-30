@@ -101,6 +101,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Media Handling
+MEDIA_ROOT = os.path.join(BASE_DIR, 'files/')
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
@@ -128,6 +130,7 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'healthonline000@gmail.com'
 EMAIL_HOST_PASSWORD = 'sesGroup4'
+DEFAUL_FROM_EMAIL = 'healthonline000@gmail.com'
 
 
 # Import the settings_local.py file with the local configuration
