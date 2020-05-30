@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+
+<body style="margin-top:100px; margin-left: 15%; margin-right:15%;">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="text-center">
+                <img src="//placehold.it/100" class="avatar img-circle" alt="avatar">
+                <h6>Upload a different photo</h6>
+
+                <input type="file" class="custom-file-input" id="customFile" style="padding">
+                <label class="custom-file-label" for="customFile" style="margin-top:130px;">
+                    <center>Choose file</center>
+                </label>
+            </div>
+        </div>
+        <div class="col-md-7">
+            <form>
+                <div class="form-group">
+                    <label for="email">Email address</label>
+                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp" readonly>
+                </div>
+<div>
+                    <button type="button" class="btn btn-secondary btn-sm" data-toggle="collapse" data-target="#changeEmail" aria-expanded="false" aria-controls="collapseExample">
+                        Change email
+                    </button>
+                </div>
+                <div class="collapse" id="changeEmail">  
+                        <form >
+                            <label for="newemail">New email address</label>
+                            <input type="newemail" class="form-control" id="newemail" aria-describedby="emailHelp">
+                            <div class="col-12" style="padding-top:10px;">
+                                <button type="submit" class="btn btn-secondary">Submit</button>
+                            </div>
+                        </form>
+                </div>
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" id="username" aria-describedby="usernameHelp" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="Organisation">Organisation</label>
+                    <input type="text" class="form-control" id="Organisation" aria-describedby="usernameHelp" readonly>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+</body>
+{% endblock %}
