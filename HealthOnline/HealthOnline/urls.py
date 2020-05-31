@@ -15,12 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-
+from django.conf.urls import url
 
 urlpatterns = [
     path('admin/', admin.site.urls, name='admin'),
     path('', include('System.urls')),
-]
+    
+    ]
 
 '''
 I carried the urls associated with our core app System to System file. 

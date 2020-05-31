@@ -61,12 +61,6 @@ def login_view(request, *args, **kwargs):
     context = {'form':form}
     return render(request, 'login.html', context)
 
-
-
-def chat_view(request, *args, **kwargs):
-    return render(request, "chat.html", {})
-
-
 # Registration Views
 
 @unauthenticated_user
@@ -211,7 +205,7 @@ def schedule_view(request, user_name,*args, **kwargs):
                 'saturday' : saturday,
                 'sunday' : sunday,
                 }
-    return render(request, 'schedule.html', context)
+    return render(request, 'scheduletest.html', context)
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['Patients', 'Doctor'])
@@ -265,25 +259,75 @@ def create_prescription_view(request, user_name, *args, **kwargs):
     return render(request, 'doctor_prescription.html', context)
 
 
-'''
-def register_view(request, *args, **kwargs):
-    return render(request, "register.html", {})
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['Doctors'])
+def doctor_profile_view(request, user_name):
     
-# test frontend page
-def test_view(request):
+    doctor = User.objects.get(username=user_name)
+    doctor_profile = UserProfile.objects.get(user=doctor)
 
-    return render(request, 'test.html', {})
+    form = DoctorProfileForm()
+    location = None
 
-def appointment_view(request, *args, **kwargs):
+    if request.method == 'POST':
+        form = DoctorProfileForm(request.POST)
+        
+        if form.is_valid():
+            replacement_email = form.cleaned_data.get('email')
+            replacement_organization = form.cleaned_data.get('organization')
+            location = form.cleaned_data.get('location')
+
+            if replacement_email:
+                doctor.email = replacement_email
+                doctor.save()
+
+            if replacement_organization:
+                doctor_profile.organization = replacement_organization
+                doctor_profile.save()
+
+            if location:
+                doctor_profile.location = location
+                doctor_profile.save()
+
+        else:
+            logger.debug(form.errors.as_data())
+
+    context = {'form' : form,
+                'doctor_profile': doctor_profile,
+                'location' : location,
+            }
+    return render(request, 'doctor_profile.html', context)
+
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['Patients'])
+def patient_profile_view(request, user_name):
     
-    return render(request, 'appointment.html', {})
-def schedule_view(request, *args, **kwargs):
-    
-    return render(request, 'schedule.html', {})
+    patient = User.objects.get(username=user_name)
+    patient_profile = UserProfile.objects.get(user=patient)
 
-def register_view(request, *args, **kwargs):
-    return render(request, "register.html", {})
-'''
+    form = PatientProfileForm()
+    
+    if request.method == 'POST':
+        form = PatientProfileForm(request.POST)
+        
+        if form.is_valid():
+            replacement_email = form.cleaned_data.get('email')
+           
+            if replacement_email:
+                patient.email = replacement_email
+                patient.save()
+
+        else:
+            logger.debug(form.errors.as_data())
+
+    context = {'form' : form,
+                'patient_profile': patient_profile,
+            }
+    return render(request, 'patient_profile.html', context)
+
+
+
 def logout_view(request):
     logout(request)
     messages.info(request, "Logged out successfully!")

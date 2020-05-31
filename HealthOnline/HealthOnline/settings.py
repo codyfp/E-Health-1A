@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'System',
-    'django_private_chat',
 ]
 
 MIDDLEWARE = [
@@ -132,14 +131,12 @@ EMAIL_HOST_USER = 'healthonline000@gmail.com'
 EMAIL_HOST_PASSWORD = 'sesGroup4'
 DEFAUL_FROM_EMAIL = 'healthonline000@gmail.com'
 
+# Google Maps Configuration
+
+GOOGLE_MAPS_API_KEY = 'AIzaSyAvlURNupinZOd6UQE4Bi74THoyDMx6dkA'
 
 # Import the settings_local.py file with the local configuration
 try:
     from .settings_local import *
 except Exception as e:
     print(e)
-
-#Chat
-CHAT_WS_SERVER_HOST = 'localhost'
-CHAT_WS_SERVER_PORT = 5002
-CHAT_WS_SERVER_PROTOCOL = 'ws'

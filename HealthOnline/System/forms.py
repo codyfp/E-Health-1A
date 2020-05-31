@@ -4,6 +4,10 @@ from django import forms
 from django.db import transaction
 from System.models import Consultation, Prescription
 
+import logging
+# Log file configuration
+logger = logging.getLogger('__name__')
+
 class DoctorSignUpForm(UserCreationForm):
     
     organization = forms.CharField(label='Current Health Organization', max_length=100, widget=forms.TextInput(attrs={
@@ -99,3 +103,22 @@ class PrescriptionForm(forms.Form):
     prescription_file = forms.FileField(label='Upload prescription document', label_suffix='',
         widget=forms.FileInput(attrs={'class':'', 'name':'prescription_file' }))
      
+class DoctorProfileForm(forms.Form):
+   
+    email = forms.EmailField(required=False ,label='email', max_length=100, widget=forms.EmailInput(attrs={
+        'class': 'form-control', 'placeholder': 'Please enter new email'
+        }) )
+    organization = forms.CharField(required=False, label='organization', max_length=100, widget=forms.TextInput(attrs={
+        'class': 'form-control', 'placeholder': 'Please enter new organuization'
+        }) )
+    location = forms.CharField(required=False, label='location', max_length=100, widget=forms.TextInput(attrs={
+        'class': 'form-control', 'placeholder': 'Please enter your current address'
+        }) )
+    
+
+class PatientProfileForm(forms.Form):
+   
+    email = forms.EmailField(required=False ,label='email', max_length=100, widget=forms.EmailInput(attrs={
+        'class': 'form-control', 'placeholder': 'Please enter new email'
+        }) )
+   
