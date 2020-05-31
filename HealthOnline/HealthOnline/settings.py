@@ -133,7 +133,7 @@ DEFAUL_FROM_EMAIL = 'healthonline000@gmail.com'
 
 # Google Maps Configuration
 
-GOOGLE_MAPS_API_KEY = 'AIzaSyAvlURNupinZOd6UQE4Bi74THoyDMx6dkA'
+GOOGLE_MAPS_API_KEY = 'kkkkkkkkkkkkkkkkkkkkkkkkkk'
 
 # Import the settings_local.py file with the local configuration
 try:
