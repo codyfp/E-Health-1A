@@ -27,8 +27,13 @@
                 <div class="appointment form" style="width: 450px;
         background-color: #E2E2E2;
         -webkit-border-radius: 10px; padding-bottom: 10px;">
+                   
+                
                     <form class='ConsultationForm' method="POST" action="">
                         {% csrf_token %}
+                        {% for message in messages %}
+                            <p id="messages">{{message}}</p>
+                        {% endfor %}
                         <div class="form-group row" style="padding-left: 15px;">
                             <label for="doctor" class="col-2 col-form-label">Doctor</label>
                             <div class="col-12">
