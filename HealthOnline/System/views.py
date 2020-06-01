@@ -186,22 +186,22 @@ def schedule_view(request, user_name,*args, **kwargs):
     is_doctor = UserProfile.objects.get(user=user).is_doctor
     
     if is_doctor:
-        monday = Consultation.objects.filter(doctor=user, date=dates[0])
-        tuesday = Consultation.objects.filter(doctor=user, date=dates[1])
-        wednesday = Consultation.objects.filter(doctor=user, date=dates[2])
-        thursday = Consultation.objects.filter(doctor=user, date=dates[3])
-        friday = Consultation.objects.filter(doctor=user, date=dates[4])
-        saturday = Consultation.objects.filter(doctor=user, date=dates[5])
-        sunday = Consultation.objects.filter(doctor=user, date=dates[6])
+        monday = Consultation.objects.filter(doctor=user, date=dates[0], is_active=True)
+        tuesday = Consultation.objects.filter(doctor=user, date=dates[1], is_active=True)
+        wednesday = Consultation.objects.filter(doctor=user, date=dates[2], is_active=True)
+        thursday = Consultation.objects.filter(doctor=user, date=dates[3], is_active=True)
+        friday = Consultation.objects.filter(doctor=user, date=dates[4], is_active=True)
+        saturday = Consultation.objects.filter(doctor=user, date=dates[5], is_active=True)
+        sunday = Consultation.objects.filter(doctor=user, date=dates[6], is_active=True)
 
     else:
-        monday = Consultation.objects.filter(patient=user, date=dates[0])
-        tuesday = Consultation.objects.filter(patient=user, date=dates[1])
-        wednesday = Consultation.objects.filter(patient=user, date=dates[2])
-        thursday = Consultation.objects.filter(patient=user, date=dates[3])
-        friday = Consultation.objects.filter(patient=user, date=dates[4])
-        saturday = Consultation.objects.filter(patient=user, date=dates[5])
-        sunday = Consultation.objects.filter(patient=user, date=dates[6])
+        monday = Consultation.objects.filter(patient=user, date=dates[0], is_active=True)
+        tuesday = Consultation.objects.filter(patient=user, date=dates[1], is_active=True)
+        wednesday = Consultation.objects.filter(patient=user, date=dates[2], is_active=True)
+        thursday = Consultation.objects.filter(patient=user, date=dates[3], is_active=True)
+        friday = Consultation.objects.filter(patient=user, date=dates[4], is_active=True)
+        saturday = Consultation.objects.filter(patient=user, date=dates[5], is_active=True)
+        sunday = Consultation.objects.filter(patient=user, date=dates[6], is_active=True)
 
 
     context = { 'monday': monday,
