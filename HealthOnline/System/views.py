@@ -144,16 +144,23 @@ def appointment_view(request, user_name,*args, **kwargs):
     if request.method == 'POST':
         if remove_id != None:
             logger.debug(remove_id)
-            appt = user_appointments.get(id=remove_id)
-            appt.deactivate()
-            appt.save()
+            try:
+                appt = user_appointments.get(id=remove_id)
+                appt.deactivate()
+                appt.save()
+            except:
+                messages.info(request, 'No consultation found. Please try again.')
         else:
             form = ConsultationForm(request.POST)
             if form.is_valid():
-                doctor = User.objects.get(username=form.cleaned_data.get('doc_username'))
-                Consultation.objects.create(patient=patient, doctor=doctor, 
-                complaint=form.cleaned_data.get('complaint'), date=form.cleaned_data.get('date'),
-                time=form.cleaned_data.get('time'))
+                try:
+                    doctor = User.objects.get(username=form.cleaned_data.get('doc_username'))
+                    Consultation.objects.create(patient=patient, doctor=doctor, 
+                    complaint=form.cleaned_data.get('complaint'), date=form.cleaned_data.get('date'),
+                    time=form.cleaned_data.get('time'))
+                except User.DoesNotExist:
+                    messages.info(request, 'No Doctor Found. Please try again.')
+
             else:
                 logger.debug(form.errors.as_data())
 
