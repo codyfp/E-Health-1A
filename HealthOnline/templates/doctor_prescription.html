@@ -9,6 +9,7 @@
         <div class="headerunderline">
             <h1 style="text-align: center">Create a Prescription</h1>
         </div>
+        
         <form class="prescriptionForm" method="POST" action="" enctype="multipart/form-data">
             {% csrf_token %}
             {% for message in messages %}
