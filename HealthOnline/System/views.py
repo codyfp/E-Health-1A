@@ -7,9 +7,9 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.core.mail import EmailMessage
-import datetime
-
 from django.conf import settings
+
+from datetime import datetime, timedelta
 
 from System.forms import *
 from System.models import *
@@ -153,11 +153,17 @@ def appointment_view(request, user_name,*args, **kwargs):
         else:
             form = ConsultationForm(request.POST)
             if form.is_valid():
+                consultation_datetime = datetime.combine(form.cleaned_data.get('date'), form.cleaned_data.get('time'))
+                overlap_consultation = Consultation.objects.filter(date=form.cleaned_data.get('date'), time__range=[consultation_datetime.time(), (consultation_datetime + timedelta(hours = 1)).time()])
+
                 try:
-                    doctor = User.objects.get(username=form.cleaned_data.get('doc_username'))
-                    Consultation.objects.create(patient=patient, doctor=doctor, 
-                    complaint=form.cleaned_data.get('complaint'), date=form.cleaned_data.get('date'),
-                    time=form.cleaned_data.get('time'))
+                    if not overlap_consultation.exists():
+                        doctor = User.objects.get(username=form.cleaned_data.get('doc_username'))
+                        Consultation.objects.create(patient=patient, doctor=doctor, 
+                        complaint=form.cleaned_data.get('complaint'), date=form.cleaned_data.get('date'),
+                        time=form.cleaned_data.get('time'))
+                    else:
+                        messages.info(request, 'There is a consultation booked for this hour. Please try again.')
                 except User.DoesNotExist:
                     messages.info(request, 'No Doctor Found. Please try again.')
 
