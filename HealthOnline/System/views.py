@@ -181,12 +181,12 @@ def schedule_view(request, user_name,*args, **kwargs):
 
     date = timezone.now().date()
     wk_day = date.weekday()
-    date -= datetime.timedelta(days=wk_day)
+    date -= timedelta(days=wk_day)
     
     dates = []
     for i in range(0, 7):
         dates.append(date)
-        date += datetime.timedelta(days=1)
+        date += timedelta(days=1)
     for dt in dates: logger.debug(dt)
     
     is_doctor = UserProfile.objects.get(user=user).is_doctor
