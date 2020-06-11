@@ -149,7 +149,7 @@ def appointment_view(request, user_name,*args, **kwargs):
                 appt.deactivate()
                 appt.save()
             except:
-                messages.info(request, 'No consultation found. Please try again.')
+                messages.info(request, 'Consultation Not Found. Please try again.')
         else:
             form = ConsultationForm(request.POST)
             if form.is_valid():
@@ -165,7 +165,7 @@ def appointment_view(request, user_name,*args, **kwargs):
                     else:
                         messages.info(request, 'There is a consultation booked for this hour. Please try again.')
                 except User.DoesNotExist:
-                    messages.info(request, 'No Doctor Found. Please try again.')
+                    messages.info(request, 'Doctor Not Found. Please try again.')
 
             else:
                 logger.debug(form.errors.as_data())
@@ -264,7 +264,7 @@ def create_prescription_view(request, user_name, *args, **kwargs):
                 prescription.save()
                 return redirect('doctor_panel', user_name=user_name)
             except User.DoesNotExist:
-                messages.info(request, 'No User Found. Please try again.')
+                messages.info(request, 'Patient Not Found. Please try again.')
         else:
             logger.debug(form.errors.as_data())
 
