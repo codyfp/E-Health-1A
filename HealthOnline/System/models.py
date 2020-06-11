@@ -44,7 +44,6 @@ class UserProfile(models.Model):
     created_date        = models.DateTimeField(null=True, blank=True)
     last_update         = models.DateTimeField(null=True, blank=True)
     Identity_Document   = models.FileField(upload_to=('user_'+str(id)+'/Identity/'))
-    location            = models.CharField(max_length=200, null=True)
     
     is_doctor           = models.BooleanField(default=False)
     is_patient          = models.BooleanField(default=False)
